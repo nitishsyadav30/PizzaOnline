@@ -6,7 +6,6 @@
 
 package controller;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -18,12 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
-//import model.ConnectionDb;
+
 /**
  *
  * @author Nitish
  */
-public class signUpController extends HttpServlet {
+public class loginController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,32 +37,24 @@ public class signUpController extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String email=request.getParameter("email");
-        String mobile = request.getParameter("mobile");
-        String city = request.getParameter("city");
-        String password = request.getParameter("password"); 
+        HttpSession session = request.getSession(true);
+        String email =request.getParameter("email");
+        String password =request.getParameter("password");
+        model.User user=new User();
+        user.setEmail(email);
+        user.setPassword(password);
         try {
-             
-             model.User ugs=new User();
-             ugs.setEmail(email.toString());
-             ugs.setMobile(mobile.toString());
-             ugs.setCity(city.toString());
-             ugs.setPassword(password.toString());
-             
-             if(ugs.userExists()==true){
-                 System.out.println("Haan");
-                 out.println("<h1>User Exist</h1>");
-                // RequestDispatcher rd= request.getRequestDispatcher("login.jsp");
-                // rd.forward(request, response);
-             }
-             else{
-               //  System.out.println("Naa");
-               //RequestDispatcher rd= request.getRequestDispatcher("menu.jsp");
-                // rd.forward(request, response);
-                ugs.insertUser();
-             }
+           if(user.loginUser()==true){
+               RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+               rd.forward(request, response);
+               
+           }
+           else{
+               RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+               rd.forward(request, response);
+           }
         } finally {
-            
+            out.close();
         }
     }
 
@@ -82,7 +73,7 @@ public class signUpController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(signUpController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -100,7 +91,7 @@ public class signUpController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(signUpController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

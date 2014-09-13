@@ -9,22 +9,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        
     </head>
     <body>
         <%@include file="include/navbar.jsp" %>
         <div class="container">
             <div class="col-lg-5" style="margin-top: -20em">
-                <form action="#" method="post">
+                <form action="signUpController" method="post">
                     <legend>Sign Up</legend>
                     <div class="row" style="margin: 10px;">
-                        <input type="text" class="form-control" placeholder="Mobile Number" name="mobile" required>
+                        <input type="text" class="form-control" placeholder="Email (email@example.com)" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                     </div>
                     <div class="row" style="margin: 10px;">
-                        <input type="text" class="form-control" placeholder="City" name="city" required>
+                        <input type="text" class="form-control" placeholder="10 Digit Mobile Number" name="mobile" pattern="[0-9]{10}" maxlength="11" required>
                     </div>
                     <div class="row" style="margin: 10px;">
-                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                        <input type="text" class="form-control" placeholder="City (minimum 3 characters)" name="city" pattern="[a-zA-Z]{3,20}" min="3"  required>
+                    </div>
+                    <div class="row" style="margin: 10px;">
+                        <input type="password" class="form-control" placeholder="Password (min 4 characters)" name="password" pattern="[a-zA-Z0-9]{4,15}" maxlength="15" required>
                     </div>
                     <div class="row" style="margin:10px">
                         <input type="submit" value="Sign Up" class="btn-warning btn-block">

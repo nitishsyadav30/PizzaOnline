@@ -15,13 +15,13 @@
         <%@include file="include/navbar.jsp" %>
         <div class="container">
             <div class="col-lg-4" style="margin-top: -20em">
-                <form action="#" method="post">
+                <form action="loginController" method="post">
                     <legend>Login</legend>
                     <div class="row" style="margin: 10px;">
-                        <input type="text" class="form-control" placeholder="Mobile Number" name="mobile" required>
-                    </div>
+                     <input type="text" class="form-control" placeholder="Email (email@example.com)" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                     </div>
                     <div class="row" style="margin: 10px;">
-                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                        <input type="password" class="form-control" placeholder="Password" name="password" pattern="[a-zA-Z0-9]{4,15}" maxlength="15" required>
                     </div>
                     <div class="row" style="margin: 10px;">
                         <input type="submit" class="btn-warning btn-block">

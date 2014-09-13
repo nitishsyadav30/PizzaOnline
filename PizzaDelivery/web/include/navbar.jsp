@@ -3,6 +3,7 @@
     Created on : 9 Sep, 2014, 2:35:08 PM
     Author     : Nitish
 --%>
+<title>Buy Online at Planet Pizza</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/style2.css">
