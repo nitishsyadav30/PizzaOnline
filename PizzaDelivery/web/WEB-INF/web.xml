@@ -12,6 +12,26 @@
         <servlet-name>addPizzaController</servlet-name>
         <servlet-class>controller.addPizzaController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>menuController</servlet-name>
+        <servlet-class>controller.menuController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MenuController</servlet-name>
+        <servlet-class>controller.MenuController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>orderController</servlet-name>
+        <servlet-class>controller.orderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>_addToCart</servlet-name>
+        <servlet-class>controller._addToCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>confirmController</servlet-name>
+        <servlet-class>controller.confirmController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>signUpController</servlet-name>
         <url-pattern>/signUpController</url-pattern>
@@ -23,6 +43,26 @@
     <servlet-mapping>
         <servlet-name>addPizzaController</servlet-name>
         <url-pattern>/addPizzaController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>menuController</servlet-name>
+        <url-pattern>/menuController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MenuController</servlet-name>
+        <url-pattern>/MenuController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>orderController</servlet-name>
+        <url-pattern>/orderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>_addToCart</servlet-name>
+        <url-pattern>/_addToCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>confirmController</servlet-name>
+        <url-pattern>/confirmController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

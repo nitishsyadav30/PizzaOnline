@@ -3,25 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.User;
 
 /**
  *
  * @author Nitish
  */
-public class loginController extends HttpServlet {
+public class orderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,37 +31,28 @@ public class loginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        //create session
-        HttpSession session = request.getSession(true);
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        model.User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
         try {
-            if (request.getParameter("logout") != null) {
-                session.invalidate();
-                RequestDispatcher rds = request.getRequestDispatcher("login.jsp");
-                rds.forward(request, response);
-            }
-            if (user.loginUser() == true) {
-                session.setAttribute("email", email);
-                session.setMaxInactiveInterval(10 * 60);
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                rd.forward(request, response);
-
-            } else {
-                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                rd.forward(request, response);
-            }
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession session =request.getSession();
+            String name =request.getParameter("name");
+            String quantity =request.getParameter("quantity");
+            String price =request.getParameter("price");
+            
+            session.setAttribute("name", name);
+            session.setAttribute("quantity", quantity);
+            session.setAttribute("price", price);
+           // RequestDispatcher rd = request.getRequestDispatcher("orderConfirmation.jsp");
+           // rd.forward(request, response);     
+            response.sendRedirect("orderConfirmation.jsp");
+            //out.println(name+quantity+price);
         } finally {
             out.close();
         }
-
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -76,11 +65,7 @@ public class loginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -94,11 +79,7 @@ public class loginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

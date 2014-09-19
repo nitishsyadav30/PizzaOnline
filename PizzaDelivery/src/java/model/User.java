@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import model.ConnectionDb;
 /**
  *
@@ -88,13 +89,18 @@ public class User {
              ps.setString(2,getMobile());
              ps.setString(3,getCity());
              ps.setString(4,getPassword());
-            return ps.execute();
-              
+             
+             if(ps.execute()){
+                 return true;
+               
+             }
             
          } catch (SQLException ex) {
              Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+             
          }
-      return false;
+         return true;
+      
     }
     
     public boolean loginUser(){
@@ -103,6 +109,7 @@ public class User {
               st = con.createStatement();
               ResultSet rs=  st.executeQuery("select email,password from pd_users where email like \""+email+"\" AND password like \""+password+"\"");
               if(rs.first()){
+          
                 return true;
               }
               

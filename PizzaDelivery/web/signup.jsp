@@ -15,6 +15,12 @@
         <%@include file="include/navbar.jsp" %>
         <div class="container">
             <div class="col-lg-5" style="margin-top: -20em">
+                <% if(request.getAttribute("exist")!=null){%>
+                <div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <strong>Warning!</strong><%= request.getAttribute("exist") %> 
+</div>
+                <% }%>
                 <form action="signUpController" method="post">
                     <legend>Sign Up</legend>
                     <div class="row" style="margin: 10px;">
@@ -37,3 +43,5 @@
         </div>
     </body>
 </html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

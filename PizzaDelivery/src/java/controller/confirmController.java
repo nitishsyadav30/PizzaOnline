@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.User;
+import model.ConfirmOrder;
 
 /**
  *
  * @author Nitish
  */
-public class loginController extends HttpServlet {
-
+public class confirmController extends HttpServlet {
+String totalprice;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,34 +36,31 @@ public class loginController extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        //create session
-        HttpSession session = request.getSession(true);
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        model.User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
         try {
-            if (request.getParameter("logout") != null) {
-                session.invalidate();
-                RequestDispatcher rds = request.getRequestDispatcher("login.jsp");
-                rds.forward(request, response);
-            }
-            if (user.loginUser() == true) {
-                session.setAttribute("email", email);
-                session.setMaxInactiveInterval(10 * 60);
-                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                rd.forward(request, response);
-
-            } else {
-                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                rd.forward(request, response);
-            }
+            /* TODO output your page here. You may use following sample code. */
+            HttpSession hs= request.getSession();
+           String city =request.getParameter("city");
+           String street=request.getParameter("street");
+           String building=request.getParameter("building");
+           String area=request.getParameter("area");
+           String name=(String)hs.getAttribute("name");
+           String quantity=(String)hs.getAttribute("quantity");
+           String price=(String)hs.getAttribute("price");
+           String email= (String)hs.getAttribute("email");
+           int tprice = Integer.parseInt(price) * Integer.parseInt(quantity);
+           out.println(city+street+building+area+name+tprice+email);
+           model.ConfirmOrder cobj =new ConfirmOrder();
+           if(cobj.insertOrder(email,name,tprice,city,street,building,area) == true){
+             response.sendRedirect("thankyou.jsp");
+           }
+          
+        
+           
         } finally {
             out.close();
         }
-
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -76,11 +73,11 @@ public class loginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    try {
+        processRequest(request, response);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(confirmController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
@@ -94,11 +91,11 @@ public class loginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    try {
+        processRequest(request, response);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(confirmController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     /**
